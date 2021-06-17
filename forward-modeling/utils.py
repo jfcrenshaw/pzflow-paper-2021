@@ -163,7 +163,7 @@ class LineConfusion:
         # get the minimum redshift
         # if wrong_wavelen < true_wavelen, this is minimum the redshift for
         # which the confused redshift is still positive
-        zmin = self.true_wavelen / self.wrong_wavelen - 1
+        zmin = self.wrong_wavelen / self.true_wavelen - 1
         # select the random fraction of galaxies whose lines are confused
         rng = np.random.default_rng(seed)
         idx = rng.choice(
@@ -174,7 +174,7 @@ class LineConfusion:
         # transform these redshifts
         values[idx, 0] = (
             1 + values[idx, 0]
-        ) * self.wrong_wavelen / self.true_wavelen - 1
+        ) * self.true_wavelen / self.wrong_wavelen - 1
         # return results in a data frame
         return pd.DataFrame(values, columns=columns)
 
@@ -229,13 +229,14 @@ def photoz_stats(photoz: np.ndarray, specz: np.ndarray):
     idx = np.where((specz > 0.01) & (specz < 2.7))
     photoz, specz = photoz[idx], specz[idx]
 
-    dz = (photoz - specz) / (1 + photoz)
+    dz = (photoz - specz) / (1 + specz)
+    
     q25, q75 = np.percentile(dz, [25, 75])
     iqr = q75 - q25
-    in_iqr = np.where((q25 < dz) & (dz < q75))
-
-    bias = dz[in_iqr].mean()
     sig = iqr / 1.349
+    
     fout = np.where(np.abs(dz) > 3 * sig)[0].size / dz.size
+    
+    bias = dz[np.where(np.abs(dz) < 3 * sig)].mean()
 
     return bias, sig, fout
