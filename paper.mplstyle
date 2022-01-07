@@ -5,7 +5,7 @@
 figure.figsize : 3.35, 3.35
 figure.dpi     : 150
 figure.titlesize : 10
-#figure.autolayout : True
+figure.constrained_layout.use: False
 
 # Fonts
 font.size   : 10
