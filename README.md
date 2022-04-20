@@ -1,2 +1,2 @@
-# pzflow-paper-2021
-Plots for the pzflow 2021 paper
+# pzflow-paper
+Plots for the pzflow paper
