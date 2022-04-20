@@ -1,0 +1,9 @@
+name: pzflow-paper
+
+channels:
+  - defaults
+  - conda-forge
+
+dependencies:
+  - python=3.9
+  - poetry=1.1.*
