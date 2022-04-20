@@ -9,6 +9,7 @@ license = "MIT"
 python = "^3.9"
 pzflow = "^3.0.1"
 matplotlib = "^3.5.1"
+corner = "^2.2.1"
 jupyter = "^1.0.0"
 
 [tool.poetry.dev-dependencies]
