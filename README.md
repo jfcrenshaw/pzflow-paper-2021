@@ -1,6 +1,6 @@
-# pzflow-paper-2021
+# pzflow-paper
 
-Plots for the pzflow 2021 paper
+Plots for the PZFlow paper
 
 To install packages for this repo:
 
